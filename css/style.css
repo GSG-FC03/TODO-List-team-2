@@ -1,0 +1,60 @@
+/* --Rules-- */
+
+/*LightColor*/
+:root {
+    --actionColor: #f79e44;
+    --mainBackground: #fff;
+    --taskBackground: #fff;
+    --tiptool: #1C2530;
+    --check: #6BE795;
+    --icon: #CCD2E3;
+    --fontColor: #0D161D;
+    --placeholderFontColor2: #808080;
+  }
+
+/*DarkColor*/
+  /* :root {
+    --actionColor: #f79e44;
+    --mainBackground: #000;
+    --taskBackground: #1C1C1F;
+    --tiptool: #fff;
+    --fontColor: #fff;
+    --fontColor2: #ECECEC;
+  } */
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  *,
+  *::after,
+  *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    outline: none;
+  }
+
+  *:placeholder-shown {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 19px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--divBackground);
+    border-radius: 50px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--actionColor);
+  }
