@@ -1,0 +1,95 @@
+/*  start of style of photo in Background of on boarding  */
+.homebackground {
+    position: relative;
+  }
+  .bgOfOnBoarding {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10000;
+    animation: popup 0.7s;
+  }
+  
+  @keyframes popup {
+    0%{
+      transform: scale(1);
+    }
+    50%{
+      transform: scale(1.4);
+    }
+    60%{
+      transform: scale(1.1);
+    }
+    70%{
+      transform: scale(1.2);
+    }
+    80%{
+      transform: scale(1);
+    }
+    90%{
+      transform: scale(1.1);
+    }
+    100%{
+      transform: scale(1);
+    }
+  }
+  /* end of  style of photo in Background of on boarding  */
+  /* start of styling on boarder page  */
+  .OnBoarding {
+    border-radius: 20px;
+    height: 518px;
+    width: 80%;
+    position: absolute;
+    top: 150px;
+    left: 40px;
+    right: 40px;
+    background-color: white;
+  }
+  .closeimg {
+    margin: 15px 20px 16px 0px;
+  }
+  .close {
+    text-align: right;
+  }
+  h3 {
+    font-size: 25px;
+    margin-top: 24px;
+  }
+  .para{
+    font-size: 15px;
+    margin-top: 12px;
+  }
+  .inputName {
+    width: 268px;
+    margin-top: 24px;
+  }
+  
+  .inputt {
+    height: 50px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 16px;
+    margin-top: 8px;
+  }
+  .labelName {
+    font-size: 15px;
+    display: block;
+  }
+  .start {
+    height: 50px;
+    background-color: #ffa14e;
+    border-radius: 8px;
+    width: 268px;
+    margin-top: 20px;
+  }
+  .BodyofOnBoarding {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
