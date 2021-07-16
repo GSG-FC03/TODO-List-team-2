@@ -9,10 +9,60 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <title>ToDO</title>
     <link rel="stylesheet" href="/css/onboarding‏.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     
+    <section class="container">
 
+        <section class="lineBelow">
+            <section class="above">
+                <section class="welcomeAndMode">
+                    <div class="welcome">
+                        <img src="/assets‏/welcome.svg" alt="" class="Hi">
+                        <span id="name" class="name">Unknown</span>
+                    </div>
+                    <div id="theme-switcher">
+                        <label class="switch">
+                            <input id="checkbox" type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="recentAndFilter">
+                    <div class="custom-select">
+                        <select>
+                            <option value="0">Recent</option>
+                            <option value="1">Recent</option>
+                            <option value="2">Time</option>
+                        </select>
+                    </div>
+
+                    <div class="custom-select wide">
+                        <select>
+                            <option value="0">Filter</option>
+                            <option value="1">None</option>
+                            <option value="2">Today</option>
+                            <option value="3">Tomorrow</option>
+                            <option value="4">Doing</option>
+                        </select>
+                    </div>
+
+                    <div class="showWay borderDark">
+                        <img src="/assets‏/list.svg" alt="">
+                        <img src="/assets‏/grid.svg" alt="">
+                    </div>
+                </section>
+
+            </section>
+        </section>
+
+        <section class="listsSection">
+            <ul class="lists" id="lists">
+               
+            </ul>
+        </section>
     
         <!-- ---------------------OnBoarding------------------ -->
 
@@ -37,5 +87,16 @@
                 </section>
             </section>
         </section>
+        <!-- ---------------------EndOfOnBoarding------------------ -->
+        
+        <footer class="footer">
+            <button id="add" class="add tooltip"><img src="/assets‏/add.svg" alt="" class="addIcon" /></button>
+            <section class="below">
+                <button class="welcomeAndMode sectionWord wordActive">To Do</button>
+                <button class="recentAndFilter sectionWord">Done</button>
+            </section>
+        </footer>
+
+    </section>
 </body>
 </html>
