@@ -1,0 +1,234 @@
+.addbackground {
+    display: none;
+  background-color: var(--bg);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  
+    z-index: 10000;
+  }
+  
+  @keyframes popup2 {
+      0%{
+        transform: translateY(1000px);
+      }
+  
+      100%{
+        transform: translateY(0px);
+      }
+    }
+  
+  *{
+      color: var(--fontColor);
+  }
+  
+  .addNoteInfo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 90%;
+    width: 375px;
+    background-color: var(--mainBackground);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    animation: popup2 0.5s;
+  }
+  .closing {
+    text-align: right;
+  }
+  .closingimg {
+    height: 24px;
+    width: 24px;
+    margin-right: 20px;
+    margin-top: 20px;
+  }
+  .addbody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 42px;
+  }
+  
+  .addtitlee {
+    height: 77px;
+    width: 291px;
+  }
+  
+  label {
+    font-size: 15px;
+  }
+  .titleinput {
+    display: block;
+    height: 50px;
+    width: 100%;
+    border-radius: 8px;
+    padding-left: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 8px;
+    background-color: var(--taskBackground);
+  }
+  ::placeholder {
+    color: #808080;
+  }
+  .adddesc {
+    height: 167px;
+    width: 87%;
+  
+  }
+  .textdesc {
+    border-radius: 8px;
+    display: block;
+    border: solid rgba(0, 0, 0, 0.1);
+    border-width: 0.5px;
+    margin-top: 8px;
+    padding-left: 16px;
+    padding-top: 16px;
+    background-color: var(--taskBackground);
+  }
+  /* .labeldesc{
+      font-size: 15px; 
+  }
+  .labeldate{
+      font-size: 15px;   
+  } */
+  
+  .dateandtime {
+    height: 77px;
+    width: 87%;
+    margin-top: 15px;
+    
+  }
+  .selectdate {
+    height: 55px;
+    width: 128px;
+    border-radius: 8px;
+    padding-left: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: var(--taskBackground);
+  }
+  .selecttime {
+    height: 55px;
+    width: 128px;
+    border-radius: 8px;
+    padding-left: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: var(--taskBackground);
+  }
+  .dtdiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+  }
+  .addlabel {
+    height: 100%;
+    width: 87%;
+    margin-top: 20px;
+  }
+  .selectlabel {
+    height: 50px;
+    width: 128px;
+    padding-left: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: var(--taskBackground);
+  }
+  .divlabel {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  .addbutton {
+    height: 50px;
+    width: 50px;
+    border-radius: 8px;
+    background-color: var(--icon);
+  }
+  
+  .colorWord{
+      margin: 0;
+  }
+  
+  .addcolor {
+    height: 70px;
+    width: 87%;
+    margin-top: 20px;
+  }
+  .addcolor input {
+    height: 40px;
+    width: 40px;
+    margin-top: 8px;
+    border-radius: 50%;
+    appearance: none;
+    position: relative;
+    margin-right:14px;
+  }
+  .clr1 {
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .clr2 {
+    background-color: #e4fff4;
+  }
+  .clr3 {
+    background-color: #fff8dd;
+  }
+  .clr4 {
+    background-color: #ffeff3;
+  }
+  .clr5 {
+    background-color: #eaedff;
+  }
+  
+  input[type="radio"]:checked:after {
+    width: 20px;
+    height: 20px;
+    border-radius: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    background-color: var(--actionColor);
+    content: "";
+    display: inline-block;
+  }
+  
+  .addTask {
+    position: absolute;
+    bottom: 3%;
+    height: 50px;
+    background-color: #ffa14e;
+    border-radius: 8px;
+    width: 291px;
+    font-size: 20px;
+  }
+  
+  .enterLabel{
+      display: none;
+      position: relative;
+      width: 100%;
+  }
+  
+  .block{
+    display: block;
+  }
+  
+  .plus{
+    transform: rotate(45deg);
+  }
+  
+  .inputLabel{
+      background-color: var(--taskBackground);
+  }
+  
+  .save{
+      position: absolute;
+      top: 40%;
+      right: 6%;
+      color: var(--actionColor);
+  }
