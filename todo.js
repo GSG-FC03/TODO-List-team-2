@@ -1,3 +1,28 @@
+const close = Array.from(document.querySelectorAll(".closee"));
+const model = Array.from(document.querySelectorAll(".bgOfOnBoarding , .addbackground"));
+const start = document.getElementById("start");
+const name = document.getElementById("name");
+const nameInput = document.getElementById("nameInput");
+// Show onboarding popup;
+if (sessionStorage.getItem('popState') !== 'shown') {
+    window.addEventListener("load", function () {
+        model[0].style.display = "block";
+        sessionStorage.setItem('popState', 'shown')
+    });
+}
+
+// Get the name of user
+start.addEventListener("click", () => {
+    name.textContent = `Hi ${nameInput.value === '' ? "Unknown" : nameInput.value}`
+    closeTab();
+})
+
+// Close the all popup
+close[0].addEventListener("click", closeTab)
+
+function closeTab() {
+    model[0].style.display = "none";
+}
 // Light and dark mode
 const themeSwitcher = document.getElementById("checkbox");
 themeSwitcher.onclick = function () {
@@ -24,3 +49,5 @@ themeSwitcher.onclick = function () {
 
     })
 }
+
+
