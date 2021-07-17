@@ -10,6 +10,10 @@
   --fontColor: #0d161d;
   --placeholderFontColor2: #808080;
   --bg: rgba(0, 0, 0, 0.3);
+  --clr: #e4fff4;
+  --clr1: #fff8dd;
+  --clr2: #ffeff3;
+  --clr3: #eaedff;
 }
 
 [data-theme="dark"] {
@@ -21,6 +25,10 @@
   --fontColor: #fff;
   --fontColor2: #ececec;
   --bg: rgba(255, 255, 255, 0.1);
+  --clr: #598070;
+  --clr1: #807859;
+  --clr2: #805963;
+  --clr3: #595e80;
 }
 
 html {
