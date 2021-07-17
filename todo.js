@@ -1,53 +1,75 @@
+const addTask = document.getElementById("addTask");
+const add = document.getElementById("add");
 const close = Array.from(document.querySelectorAll(".closee"));
 const model = Array.from(document.querySelectorAll(".bgOfOnBoarding , .addbackground"));
 const start = document.getElementById("start");
 const name = document.getElementById("name");
 const nameInput = document.getElementById("nameInput");
+
 // Show onboarding popup;
-if (sessionStorage.getItem('popState') !== 'shown') {
-    window.addEventListener("load", function () {
-        model[0].style.display = "block";
-        sessionStorage.setItem('popState', 'shown')
-    });
+if (sessionStorage.getItem("popState") !== "shown") {
+  window.addEventListener("load", function () {
+    model[0].style.display = "block";
+    sessionStorage.setItem("popState", "shown");
+  });
 }
 
 // Get the name of user
 start.addEventListener("click", () => {
-    name.textContent = `Hi ${nameInput.value === '' ? "Unknown" : nameInput.value}`
-    closeTab();
-})
+  name.textContent = `Hi ${
+    nameInput.value === "" ? "Unknown" : nameInput.value
+  }`;
+  closeTab();
+});
 
 // Close the all popup
-close[0].addEventListener("click", closeTab)
+close[0].addEventListener("click", closeTab);
+close[1].addEventListener("click", closeTab);
 
 function closeTab() {
-    model[0].style.display = "none";
+  model[0].style.display = "none";
+  model[1].style.display = "none";
 }
 // Light and dark mode
 const themeSwitcher = document.getElementById("checkbox");
 themeSwitcher.onclick = function () {
+  let dark = Array.from(
+    document.querySelectorAll(
+      ".list , .label , .borderDark , .select-selected , .lineBelow , .below"
+    )
+  );
+  let listDark = Array.from(document.querySelectorAll(".list"));
+  let checkk = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+  let currentTheme = document.documentElement.getAttribute("data-theme");
+  let switchToTheme;
 
-    let dark = Array.from(document.querySelectorAll(".list , .label , .borderDark , .select-selected , .lineBelow , .below"));
-    let listDark = Array.from(document.querySelectorAll(".list"));
-    let checkk = Array.from(document.querySelectorAll("input[type=\"checkbox\"]"));
-    let currentTheme = document.documentElement.getAttribute("data-theme");
-    let switchToTheme;
+  switchToTheme = currentTheme === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", switchToTheme);
 
-    switchToTheme = currentTheme === "dark" ? "light" : "dark"
-    document.documentElement.setAttribute("data-theme", switchToTheme);
+  dark.forEach((el) => {
+    el.classList.toggle("noborder");
+  });
 
-    dark.forEach(el => {
-        el.classList.toggle("noborder");
-    })
+  checkk.forEach((el) => {
+    el.classList.toggle("noborder");
+    if (getComputedStyle(el).border == "0px none rgb(13, 22, 29)")
+      el.style.border = "1px solid #e6e6e6";
+    else el.style.border = "none";
+  });
+};
 
-    checkk.forEach(el => {
-        el.classList.toggle("noborder");
-        if (getComputedStyle(el).border == "0px none rgb(13, 22, 29)")
-            el.style.border = "1px solid #e6e6e6"
-        else
-            el.style.border = "none";
+// Add event to addTask button
+addTask.addEventListener("click", () => {
+  closeTab();
+});
 
-    })
+// Show addTask page
+add.addEventListener("click", () => {
+  addTask.style.display = "block";
+  showAddTaskPage();
+});
+
+function showAddTaskPage() {
+  model[1].style.display = "block";
+ 
 }
-
-
