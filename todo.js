@@ -281,6 +281,23 @@ function removeTasks() {
 }
 
 
+
+// Delete Task from localStorge
+function deleteTask(e) {
+    let index = this.dataset.index;
+    let tyList = this.parentElement.parentElement.parentElement;
+    if (tyList.getAttribute("id") == "lists") {
+        tasks.splice(index, 1);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        render(lists, tasks);
+    }
+    if (tyList.getAttribute("id") == "listOfChecked") {
+        tasksChecked.splice(index, 1);
+        localStorage.setItem("tasksChecked", JSON.stringify(tasksChecked));
+        render(listOfChecked, tasksChecked);
+    }
+}
+
 // Show Update Task
 let ObjTask;
 function updateTask(ele) {
