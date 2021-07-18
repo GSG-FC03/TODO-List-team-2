@@ -398,3 +398,55 @@ function updateChanges(ObjTask) {
         return false
     }
 }
+// Add event on buttons (todo, done)
+checked.addEventListener('click', getCheckedTasks)
+uncheck.addEventListener('click', getUncheckedTasks)
+
+function moveCheckedTask(e) {
+    let index = this.parentElement.parentElement.dataset.index;
+    let itemList = tasks[index];
+    let listChildren = Array.from(lists.children);
+
+    listChildren.forEach(el => {
+        if (el.getAttribute("data-index") == index)
+            el.classList.add("move");
+    })
+
+    setTimeout(() => {
+        tasksChecked.push(itemList)
+        tasks.pop(itemList)
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        localStorage.setItem("tasksChecked", JSON.stringify(tasksChecked));
+        render(lists, tasks);
+    }, 400)
+}
+
+// Get checked Tasks from localStorage
+function getCheckedTasks() {
+    checked.classList.add("wordActive")
+    uncheck.classList.remove("wordActive")
+    uncheckSection.style.display = "none"
+    checkedSection.style.display = "block"
+    let taskData = localStorage.getItem("tasksChecked");
+    tasksChecked = JSON.parse(taskData);
+    if (!(Array.isArray(tasksChecked) && tasksChecked.length)) {
+        tasksChecked = [];
+        return;
+    }
+    render(listOfChecked, tasksChecked);
+}
+
+// Get Unchecked Tasks from localStorage
+function getUncheckedTasks() {
+    checked.classList.remove("wordActive")
+    uncheck.classList.add("wordActive")
+    checkedSection.style.display = "none"
+    uncheckSection.style.display = "block"
+    let taskData = localStorage.getItem("tasks");
+    tasks = JSON.parse(taskData);
+    if (!(Array.isArray(tasks) && tasks.length)) {
+        tasks = [];
+        return;
+    }
+    render(lists, tasks);
+}
