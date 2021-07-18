@@ -230,3 +230,17 @@ function render(typeOflist, typeOfArray) {
     createNoTasks()
   }
 }
+
+// Remove All Tasks From Lists
+function removeTasks() {
+  let child = lists.lastElementChild;
+  let childs = listOfChecked.lastElementChild;
+  while (child) {
+    lists.removeChild(child);
+    child = lists.lastElementChild;
+  }
+  while (childs) {
+    listOfChecked.removeChild(childs);
+    childs = listOfChecked.lastElementChild;
+  }
+}
