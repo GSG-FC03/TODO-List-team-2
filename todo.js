@@ -52,6 +52,32 @@ function closeTab() {
   model[0].style.display = "none";
   model[1].style.display = "none";
 }
+// open the input to write new label
+addLabel.addEventListener("click", openAndCloseAddLabel)
+
+function openAndCloseAddLabel() {
+  plus.classList.toggle("plus");
+  enterLabel.classList.toggle("block");
+  inputLabel.focus();
+  inputLabel.value = ''
+}
+
+// Get the label that created by the user and put it in select label
+let labelsData = localStorage.getItem('itemLabels');
+itemLabels = JSON.parse(labelsData)
+save.addEventListener("click", () => {
+  let valueOfLabel = inputLabel.value;
+
+  let label = document.getElementById("label");
+  let opt = document.createElement('option');
+  opt.appendChild(document.createTextNode(valueOfLabel));
+  opt.value = valueOfLabel;
+  label.appendChild(opt);
+  itemLabels.push(valueOfLabel)
+  localStorage.setItem('itemLabels', JSON.stringify(itemLabels))
+  openAndCloseAddLabel();
+})
+
 // Light and dark mode
 const themeSwitcher = document.getElementById("checkbox");
 themeSwitcher.onclick = function () {
@@ -126,6 +152,15 @@ function createTask() {
     label: `${selectedLabel}`,
     color: `${clr.value}`
   }
+
+  labelsData = localStorage.getItem('itemLabels');
+  labelArray = JSON.parse(labelsData)
+  let label = document.getElementById("label");
+  labelArray.forEach(el => {
+    let opt = document.createElement('option');
+    opt.appendChild(document.createTextNode(el));
+    label.appendChild(opt);
+  })
 
   tasks.push(task)
   localStorage.setItem('tasks', JSON.stringify(tasks))
