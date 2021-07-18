@@ -1,3 +1,25 @@
+let tasks = [];
+
+// Get all element that we want to make something on it
+const themeSwitcher = document.getElementById("checkbox");
+const lists = document.getElementById("lists");
+const listOfChecked = document.getElementById("listOfChecked");
+const updateTaskbtn = document.getElementById("updateTask");
+const addLabel = document.getElementById("addLabel");
+const enterLabel = document.getElementById("enterLabel");
+const plus = document.getElementById("plus");
+const inputLabel = document.getElementById("inputLabel");
+const save = document.getElementById("save");
+const uncheckSection = document.getElementById("uncheckSection");
+const checkedSection = document.getElementById("checkedSection");
+const uncheck = document.getElementById("uncheck");
+const checked = document.getElementById("checked");
+const formTask = document.getElementById("formTask");
+let getTime = document.getElementById("getTime");
+let getDate = document.getElementById("getDate");
+let SaveTAndD = document.getElementById("SaveTAndD");
+let postDate = document.getElementById("postDate");
+let postTime = document.getElementById("postTime");
 const addTask = document.getElementById("addTask");
 const add = document.getElementById("add");
 const close = Array.from(document.querySelectorAll(".closee"));
@@ -60,16 +82,52 @@ themeSwitcher.onclick = function () {
 
 // Add event to addTask button
 addTask.addEventListener("click", () => {
+  createTask();
   closeTab();
 });
 
 // Show addTask page
 add.addEventListener("click", () => {
+  updateTaskbtn.style.display = "none"
   addTask.style.display = "block";
   showAddTaskPage();
 });
 
 function showAddTaskPage() {
+  title.value = ""
+  desc.value = ''
   model[1].style.display = "block";
- 
+}
+
+// Create task and storage it in localStorage 
+function createTask() {
+  let title = document.getElementById("title");
+  let desc = document.getElementById("desc");
+  let date = document.getElementById("date");
+  let time = document.getElementById("time");
+  let label = document.getElementById("label");
+  let clr = document.querySelector("input[name=\"color\"]:checked");
+  let selectedDate = date.options[date.selectedIndex].text;
+  let selectedTime = time.options[time.selectedIndex].text;
+  let selectedLabel = label.options[label.selectedIndex].text;
+
+  if (selectedDate == 'Pick a date') {
+    selectedDate = getDate.value;
+  }
+  if (selectedTime == 'Pick a time') {
+    selectedTime = getTime.value;
+  }
+
+  let task = {
+    title: `${title.value}`,
+    desc: `${desc.value}`,
+    time: `${selectedTime}`,
+    date: `${selectedDate}`,
+    label: `${selectedLabel}`,
+    color: `${clr.value}`
+  }
+
+  tasks.push(task)
+  localStorage.setItem('tasks', JSON.stringify(tasks))
+  render(lists, tasks);
 }
