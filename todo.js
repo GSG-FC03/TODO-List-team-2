@@ -279,3 +279,105 @@ function removeTasks() {
     childs = listOfChecked.lastElementChild;
   }
 }
+
+
+// Show Update Task
+let ObjTask;
+function updateTask(ele) {
+    "use strict"
+    postTandD.style.display = "none"
+    addTask.style.display = "none";
+    updateTaskbtn.style.display = "block"
+    ele = ele.parentElement;
+    showAddTaskPage()
+    let order = ele.dataset.index;
+
+    ObjTask = tasks[order];
+    let titleObj = ObjTask.title;
+    let descObj = ObjTask.desc;
+    let dateObj = ObjTask.date;
+    let timeObj = ObjTask.time;
+    let labelObj = ObjTask.label;
+    let colorObj = ObjTask.color;
+
+    if (dateObj == 'None' || dateObj == 'Today' || dateObj == 'Tomorrow') {} else {
+        postDate.textContent = dateObj;
+        postTandD.style.display = "flex"
+    }
+
+    if (timeObj == 'None' || timeObj == 'Morning' || timeObj == "Afternoon" || timeObj == 'Evening' || timeObj == 'Night') {} else {
+        postTime.textContent = timeObj;
+        postTandD.style.display = "flex"
+    }
+
+    let title = document.getElementById("title");
+    let desc = document.getElementById("desc");
+    let date = document.getElementById("date");
+    let time = document.getElementById("time");
+    let label = document.getElementById("label");
+
+    title.value = titleObj;
+    desc.value = descObj;
+    let dateOptions = Array.from(date.options);
+    let timeOptions = Array.from(time.options);
+    let labelOptions = Array.from(label.options);
+    let clr = document.querySelectorAll("input[name=\"color\"]");
+
+    dateOptions.forEach(opt => {
+        opt.removeAttribute("selected");
+        if (opt.value == `${dateObj}`) {
+            opt.setAttribute("selected", "");
+        }
+    })
+
+    timeOptions.forEach(opt => {
+        opt.removeAttribute("selected");
+        if (opt.value == `${timeObj}`) {
+            opt.setAttribute("selected", "");
+        }
+    })
+
+    labelOptions.forEach(opt => {
+        opt.removeAttribute("selected");
+        if (opt.value == `${labelObj}`) {
+            opt.setAttribute("selected", "");
+        }
+    })
+
+    clr.forEach(opt => {
+        opt.removeAttribute("checked")
+        if (opt.value == `${colorObj}`) {
+            opt.setAttribute("checked", "");
+        }
+    })
+}
+
+// Update Task button(Edit Task)
+updateTaskbtn.addEventListener('click', () => {
+    if (updateChanges(ObjTask)) {
+        closeTab();
+    } else {
+        console.log(ObjTask.desc)
+        console.log(desc.value)
+        ObjTask.title = title.value;
+        ObjTask.desc = desc.value;
+        ObjTask.date = date.options[date.selectedIndex].text;
+        ObjTask.time = time.options[time.selectedIndex].text;
+        ObjTask.label = label.options[label.selectedIndex].text;
+        ObjTask.color = document.querySelector("input[name=\"color\"]:checked").value;
+        localStorage.setItem('tasks', JSON.stringify(tasks))
+        render(lists, tasks);
+        closeTab();
+    }
+})
+
+// Update changes on object task
+function updateChanges(ObjTask) {
+    if (ObjTask.title == title.value && ObjTask.desc == desc.value && date.options[date.selectedIndex].text == ObjTask.date &&
+        time.options[time.selectedIndex].text == ObjTask.time && label.options[label.selectedIndex].text == ObjTask.label &&
+        document.querySelector("input[name=\"color\"]:checked").value == ObjTask.color) {
+        return true
+    } else {
+        return false
+    }
+}
