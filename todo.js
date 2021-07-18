@@ -538,3 +538,15 @@ then close all select boxes: */
 document.addEventListener("click", closeAllSelect);
 //edit the content of task
 document.addEventListener("click", closeAllSelect);
+
+
+// Create text after delete all tasks
+function createNoTasks() {
+  let name = document.createElement("li");
+  name.setAttribute("id", "noTask");
+  let msg = document.createTextNode(
+    "No Tasks To Show, Add a new task to get things in order"
+  );
+  name.appendChild(msg);
+  name.className = "no-tasks-message";
+  lists.appendChild(name);
