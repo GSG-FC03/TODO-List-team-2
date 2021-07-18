@@ -131,3 +131,102 @@ function createTask() {
   localStorage.setItem('tasks', JSON.stringify(tasks))
   render(lists, tasks);
 }
+
+// Put all the tasks in lists DOM
+function render(typeOflist, typeOfArray) {
+  postTandD.style.display = "none"
+  removeTasks()
+  let index = 0;
+  let order = 0;
+
+  typeOfArray.forEach(t => {
+    let list = document.createElement("li");
+    list.className = 'list';
+    list.setAttribute('data-index', order++);
+    list.style.backgroundColor = `${t.color}`;
+    let nameAndTrash = document.createElement("div");
+    nameAndTrash.className = 'nameAndTrash';
+
+    let desc = document.createElement("p");
+    desc.setAttribute('onclick', "updateTask(this)");
+    desc.className = 'desc';
+    desc.appendChild(document.createTextNode(`${t.desc}`));
+
+    let labelsAndCheck = document.createElement("div");
+    labelsAndCheck.className = 'labelsAndCheck';
+
+    let nameOfTask = document.createElement("h1");
+    nameOfTask.className = 'nameOfTask';
+    nameOfTask.appendChild(document.createTextNode(`${t.title}`));
+
+    let trash = document.createElement("img");
+    trash.className = 'trash';
+    trash.setAttribute("src", "assets/trash.svg");
+    trash.setAttribute('data-index', index++);
+    trash.addEventListener('click', deleteTask);
+
+    nameAndTrash.appendChild(nameOfTask);
+    nameAndTrash.appendChild(trash);
+
+    let labels = document.createElement("div");
+    labels.className = 'labels';
+
+    let checkbox = document.createElement("input");
+    checkbox.className = 'checkbox';
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.addEventListener('click', moveCheckedTask)
+    if (typeOflist.getAttribute("id") == "listOfChecked") {
+      checkbox.setAttribute("checked", "")
+      checkbox.style.pointerEvents = "none"
+    }
+
+    labelsAndCheck.appendChild(labels);
+    labelsAndCheck.appendChild(checkbox);
+
+    let timeAndDate = document.createElement("div");
+    timeAndDate.className = 'label';
+
+    let wordLabel = document.createElement("div");
+    wordLabel.className = 'label';
+
+    labels.appendChild(timeAndDate);
+    labels.appendChild(wordLabel);
+
+    let alarm = document.createElement("img");
+    alarm.className = 'alarm';
+    alarm.setAttribute("src", "assets/alarmclock.svg");
+
+    let dataAndTime = document.createElement("span");
+    dataAndTime.className = 'dataAndTime';
+    dataAndTime.className = 'word';
+    dataAndTime.appendChild(document.createTextNode(`${t.date}` + ', ' + `${t.time}`));
+
+    timeAndDate.appendChild(alarm);
+    timeAndDate.appendChild(dataAndTime);
+
+    let labelSpan = document.createElement("span");
+    labelSpan.className = 'labelSpan';
+    labelSpan.className = 'word';
+    labelSpan.appendChild(document.createTextNode(`${t.label}`));
+    wordLabel.appendChild(labelSpan);
+
+    list.appendChild(nameAndTrash);
+    list.appendChild(desc);
+    list.appendChild(labelsAndCheck);
+
+    typeOflist.insertBefore(list, typeOflist.childNodes[0]);
+  });
+
+  let dark = Array.from(document.querySelectorAll(".list , .label , .borderDark , input[checkbox] , .lineBelow , .below"));
+  let currentTheme = document.documentElement.getAttribute("data-theme");
+  if (currentTheme === "dark") {
+    dark.forEach(el => {
+      if (!el.classList.contains("noborder"))
+        el.classList.add("noborder");
+    })
+  }
+
+  if (Array.isArray(typeOfArray) && typeOfArray.length) {} else {
+    createNoTasks()
+  }
+}
