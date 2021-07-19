@@ -81,7 +81,6 @@ save.addEventListener("click", () => {
 })
 
 // Light and dark mode
-const themeSwitcher = document.getElementById("checkbox");
 themeSwitcher.onclick = function () {
   let dark = Array.from(
     document.querySelectorAll(
@@ -157,7 +156,7 @@ function createTask() {
 
   labelsData = localStorage.getItem('itemLabels');
   labelArray = JSON.parse(labelsData)
-  let label = document.getElementById("label");
+  label = document.getElementById("label");
   labelArray.forEach(el => {
     let opt = document.createElement('option');
     opt.appendChild(document.createTextNode(el));
