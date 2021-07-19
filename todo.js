@@ -572,3 +572,14 @@ function formatDate(dateFormat) {
   getDateFormat = `${da}-${mo}`;
   return getDateFormat;
 }
+// Format Time
+function formatTime(timeFormat) {
+  let timeformat = timeFormat.value.split(":"),
+      hours = timeformat[0],
+      minutes = timeformat[1],
+      ampm = hours >= 12 ? "pm" : "am";
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  let strTime = `${hours}:${minutes} ${ampm}`;
+  return strTime;
+}
