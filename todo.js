@@ -1,4 +1,6 @@
 let tasks = [];
+let tasksChecked = [];
+let itemLabels = [];
 
 // Get all element that we want to make something on it
 const themeSwitcher = document.getElementById("checkbox");
