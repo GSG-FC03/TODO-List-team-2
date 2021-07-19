@@ -81,7 +81,6 @@ save.addEventListener("click", () => {
 })
 
 // Light and dark mode
-const themeSwitcher = document.getElementById("checkbox");
 themeSwitcher.onclick = function () {
   let dark = Array.from(
     document.querySelectorAll(
@@ -171,24 +170,24 @@ function createTask() {
   localStorage.setItem('tasks', JSON.stringify(tasks))
   render(lists, tasks);
 }
- // Format Date
- function formatDate(dateFormat) {
+// Format Date
+function formatDate(dateFormat) {
   let d = new Date(dateFormat.value),
-      mo = new Intl.DateTimeFormat("en", {
-          month: "short",
-      }).format(d),
-      da = new Intl.DateTimeFormat("en", {
-          day: "2-digit",
-      }).format(d);
+    mo = new Intl.DateTimeFormat("en", {
+      month: "short",
+    }).format(d),
+    da = new Intl.DateTimeFormat("en", {
+      day: "2-digit",
+    }).format(d);
   getDateFormat = `${da}-${mo}`;
   return getDateFormat;
 }
 // Format Time
 function formatTime(timeFormat) {
   let timeformat = timeFormat.value.split(":"),
-      hours = timeformat[0],
-      minutes = timeformat[1],
-      ampm = hours >= 12 ? "pm" : "am";
+    hours = timeformat[0],
+    minutes = timeformat[1],
+    ampm = hours >= 12 ? "pm" : "am";
   hours = hours % 12;
   hours = hours ? hours : 12;
   let strTime = `${hours}:${minutes} ${ampm}`;
@@ -312,8 +311,8 @@ function loadTasks() {
   let taskData = localStorage.getItem("tasks");
   tasks = JSON.parse(taskData);
   if (!(Array.isArray(tasks) && tasks.length)) {
-      tasks = [];
-      return;
+    tasks = [];
+    return;
   }
   render(lists, tasks);
 }
@@ -321,248 +320,249 @@ window.onload = loadTasks;
 
 // Delete Task from localStorge
 function deleteTask(e) {
-    let index = this.dataset.index;
-    let tyList = this.parentElement.parentElement.parentElement;
-    if (tyList.getAttribute("id") == "lists") {
-        tasks.splice(index, 1);
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-        render(lists, tasks);
-    }
-    if (tyList.getAttribute("id") == "listOfChecked") {
-        tasksChecked.splice(index, 1);
-        localStorage.setItem("tasksChecked", JSON.stringify(tasksChecked));
-        render(listOfChecked, tasksChecked);
-    }
+  let index = this.dataset.index;
+  let tyList = this.parentElement.parentElement.parentElement;
+  if (tyList.getAttribute("id") == "lists") {
+    tasks.splice(index, 1);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    render(lists, tasks);
+  }
+  if (tyList.getAttribute("id") == "listOfChecked") {
+    tasksChecked.splice(index, 1);
+    localStorage.setItem("tasksChecked", JSON.stringify(tasksChecked));
+    render(listOfChecked, tasksChecked);
+  }
 }
 
 // Show Update Task
 let ObjTask;
+
 function updateTask(ele) {
-    "use strict"
-    postTandD.style.display = "none"
-    addTask.style.display = "none";
-    updateTaskbtn.style.display = "block"
-    ele = ele.parentElement;
-    showAddTaskPage()
-    let order = ele.dataset.index;
+  "use strict"
+  postTandD.style.display = "none"
+  addTask.style.display = "none";
+  updateTaskbtn.style.display = "block"
+  ele = ele.parentElement;
+  showAddTaskPage()
+  let order = ele.dataset.index;
 
-    ObjTask = tasks[order];
-    let titleObj = ObjTask.title;
-    let descObj = ObjTask.desc;
-    let dateObj = ObjTask.date;
-    let timeObj = ObjTask.time;
-    let labelObj = ObjTask.label;
-    let colorObj = ObjTask.color;
+  ObjTask = tasks[order];
+  let titleObj = ObjTask.title;
+  let descObj = ObjTask.desc;
+  let dateObj = ObjTask.date;
+  let timeObj = ObjTask.time;
+  let labelObj = ObjTask.label;
+  let colorObj = ObjTask.color;
 
-    if (dateObj == 'None' || dateObj == 'Today' || dateObj == 'Tomorrow') {} else {
-        postDate.textContent = dateObj;
-        postTandD.style.display = "flex"
+  if (dateObj == 'None' || dateObj == 'Today' || dateObj == 'Tomorrow') {} else {
+    postDate.textContent = dateObj;
+    postTandD.style.display = "flex"
+  }
+
+  if (timeObj == 'None' || timeObj == 'Morning' || timeObj == "Afternoon" || timeObj == 'Evening' || timeObj == 'Night') {} else {
+    postTime.textContent = timeObj;
+    postTandD.style.display = "flex"
+  }
+
+  let title = document.getElementById("title");
+  let desc = document.getElementById("desc");
+  let date = document.getElementById("date");
+  let time = document.getElementById("time");
+  let label = document.getElementById("label");
+
+  title.value = titleObj;
+  desc.value = descObj;
+  let dateOptions = Array.from(date.options);
+  let timeOptions = Array.from(time.options);
+  let labelOptions = Array.from(label.options);
+  let clr = document.querySelectorAll("input[name=\"color\"]");
+
+  dateOptions.forEach(opt => {
+    opt.removeAttribute("selected");
+    if (opt.value == `${dateObj}`) {
+      opt.setAttribute("selected", "");
     }
+  })
 
-    if (timeObj == 'None' || timeObj == 'Morning' || timeObj == "Afternoon" || timeObj == 'Evening' || timeObj == 'Night') {} else {
-        postTime.textContent = timeObj;
-        postTandD.style.display = "flex"
+  timeOptions.forEach(opt => {
+    opt.removeAttribute("selected");
+    if (opt.value == `${timeObj}`) {
+      opt.setAttribute("selected", "");
     }
+  })
 
-    let title = document.getElementById("title");
-    let desc = document.getElementById("desc");
-    let date = document.getElementById("date");
-    let time = document.getElementById("time");
-    let label = document.getElementById("label");
+  labelOptions.forEach(opt => {
+    opt.removeAttribute("selected");
+    if (opt.value == `${labelObj}`) {
+      opt.setAttribute("selected", "");
+    }
+  })
 
-    title.value = titleObj;
-    desc.value = descObj;
-    let dateOptions = Array.from(date.options);
-    let timeOptions = Array.from(time.options);
-    let labelOptions = Array.from(label.options);
-    let clr = document.querySelectorAll("input[name=\"color\"]");
-
-    dateOptions.forEach(opt => {
-        opt.removeAttribute("selected");
-        if (opt.value == `${dateObj}`) {
-            opt.setAttribute("selected", "");
-        }
-    })
-
-    timeOptions.forEach(opt => {
-        opt.removeAttribute("selected");
-        if (opt.value == `${timeObj}`) {
-            opt.setAttribute("selected", "");
-        }
-    })
-
-    labelOptions.forEach(opt => {
-        opt.removeAttribute("selected");
-        if (opt.value == `${labelObj}`) {
-            opt.setAttribute("selected", "");
-        }
-    })
-
-    clr.forEach(opt => {
-        opt.removeAttribute("checked")
-        if (opt.value == `${colorObj}`) {
-            opt.setAttribute("checked", "");
-        }
-    })
+  clr.forEach(opt => {
+    opt.removeAttribute("checked")
+    if (opt.value == `${colorObj}`) {
+      opt.setAttribute("checked", "");
+    }
+  })
 }
 
 // Update Task button(Edit Task)
 updateTaskbtn.addEventListener('click', () => {
-    if (updateChanges(ObjTask)) {
-        closeTab();
-    } else {
-        console.log(ObjTask.desc)
-        console.log(desc.value)
-        ObjTask.title = title.value;
-        ObjTask.desc = desc.value;
-        ObjTask.date = date.options[date.selectedIndex].text;
-        ObjTask.time = time.options[time.selectedIndex].text;
-        ObjTask.label = label.options[label.selectedIndex].text;
-        ObjTask.color = document.querySelector("input[name=\"color\"]:checked").value;
-        localStorage.setItem('tasks', JSON.stringify(tasks))
-        render(lists, tasks);
-        closeTab();
-    }
+  if (updateChanges(ObjTask)) {
+    closeTab();
+  } else {
+    console.log(ObjTask.desc)
+    console.log(desc.value)
+    ObjTask.title = title.value;
+    ObjTask.desc = desc.value;
+    ObjTask.date = date.options[date.selectedIndex].text;
+    ObjTask.time = time.options[time.selectedIndex].text;
+    ObjTask.label = label.options[label.selectedIndex].text;
+    ObjTask.color = document.querySelector("input[name=\"color\"]:checked").value;
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+    render(lists, tasks);
+    closeTab();
+  }
 })
 
 // Update changes on object task
 function updateChanges(ObjTask) {
-    if (ObjTask.title == title.value && ObjTask.desc == desc.value && date.options[date.selectedIndex].text == ObjTask.date &&
-        time.options[time.selectedIndex].text == ObjTask.time && label.options[label.selectedIndex].text == ObjTask.label &&
-        document.querySelector("input[name=\"color\"]:checked").value == ObjTask.color) {
-        return true
-    } else {
-        return false
-    }
+  if (ObjTask.title == title.value && ObjTask.desc == desc.value && date.options[date.selectedIndex].text == ObjTask.date &&
+    time.options[time.selectedIndex].text == ObjTask.time && label.options[label.selectedIndex].text == ObjTask.label &&
+    document.querySelector("input[name=\"color\"]:checked").value == ObjTask.color) {
+    return true
+  } else {
+    return false
+  }
 }
 // Add event on buttons (todo, done)
 checked.addEventListener('click', getCheckedTasks)
 uncheck.addEventListener('click', getUncheckedTasks)
 
 function moveCheckedTask(e) {
-    let index = this.parentElement.parentElement.dataset.index;
-    let itemList = tasks[index];
-    let listChildren = Array.from(lists.children);
+  let index = this.parentElement.parentElement.dataset.index;
+  let itemList = tasks[index];
+  let listChildren = Array.from(lists.children);
 
-    listChildren.forEach(el => {
-        if (el.getAttribute("data-index") == index)
-            el.classList.add("move");
-    })
+  listChildren.forEach(el => {
+    if (el.getAttribute("data-index") == index)
+      el.classList.add("move");
+  })
 
-    setTimeout(() => {
-        tasksChecked.push(itemList)
-        tasks.pop(itemList)
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-        localStorage.setItem("tasksChecked", JSON.stringify(tasksChecked));
-        render(lists, tasks);
-    }, 400)
+  setTimeout(() => {
+    tasksChecked.push(itemList)
+    tasks.pop(itemList)
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("tasksChecked", JSON.stringify(tasksChecked));
+    render(lists, tasks);
+  }, 400)
 }
 
 // Get checked Tasks from localStorage
 function getCheckedTasks() {
-    checked.classList.add("wordActive")
-    uncheck.classList.remove("wordActive")
-    uncheckSection.style.display = "none"
-    checkedSection.style.display = "block"
-    let taskData = localStorage.getItem("tasksChecked");
-    tasksChecked = JSON.parse(taskData);
-    if (!(Array.isArray(tasksChecked) && tasksChecked.length)) {
-        tasksChecked = [];
-        return;
-    }
-    render(listOfChecked, tasksChecked);
+  checked.classList.add("wordActive")
+  uncheck.classList.remove("wordActive")
+  uncheckSection.style.display = "none"
+  checkedSection.style.display = "block"
+  let taskData = localStorage.getItem("tasksChecked");
+  tasksChecked = JSON.parse(taskData);
+  if (!(Array.isArray(tasksChecked) && tasksChecked.length)) {
+    tasksChecked = [];
+    return;
+  }
+  render(listOfChecked, tasksChecked);
 }
 
 // Get Unchecked Tasks from localStorage
 function getUncheckedTasks() {
-    checked.classList.remove("wordActive")
-    uncheck.classList.add("wordActive")
-    checkedSection.style.display = "none"
-    uncheckSection.style.display = "block"
-    let taskData = localStorage.getItem("tasks");
-    tasks = JSON.parse(taskData);
-    if (!(Array.isArray(tasks) && tasks.length)) {
-        tasks = [];
-        return;
-    }
-    render(lists, tasks);
+  checked.classList.remove("wordActive")
+  uncheck.classList.add("wordActive")
+  checkedSection.style.display = "none"
+  uncheckSection.style.display = "block"
+  let taskData = localStorage.getItem("tasks");
+  tasks = JSON.parse(taskData);
+  if (!(Array.isArray(tasks) && tasks.length)) {
+    tasks = [];
+    return;
+  }
+  render(lists, tasks);
 }
 
 // Sort data
 recentAndReverse.addEventListener("click", e => {
   if (e.target.textContent == "Reverse") {
-      let reverseTasks = tasks.reverse();
-      render(lists, reverseTasks);
+    let reverseTasks = tasks.reverse();
+    render(lists, reverseTasks);
   } else {
-      let reverseTasks = tasks.reverse();
-      render(lists, reverseTasks);
+    let reverseTasks = tasks.reverse();
+    render(lists, reverseTasks);
   }
 });
 
 // Filter data
 filter.addEventListener("click", e => {
   switch (e.target.textContent) {
-      case "Today":
-          let filteredTask = tasks.filter(el => el.date === "Today")
-          render(lists, filteredTask);
-          break;
-      case "Tomorrow":
-          let filteredTom = tasks.filter(el => el.date === "Tomorrow")
-          render(lists, filteredTom);
-          break;
-      case "Doing":
-          let filteredDoing = tasks.filter(el => el.label === "Doing")
-          render(lists, filteredDoing);
-          break;
-      case "Morning":
-          let filteredMorning = tasks.filter(el => el.time === "Morning")
-          render(lists, filteredMorning);
-          break;
-      case "Afternoon":
-          let filteredAfternoon = tasks.filter(el => el.time === "Afternoon")
-          render(lists, filteredAfternoon);
-          break;
-      case "Evening":
-          let filteredEvening = tasks.filter(el => el.time === "Evening")
-          render(lists, filteredEvening);
-          break;
-      case "Night":
-          let filteredNight = tasks.filter(el => el.time === "Night")
-          render(lists, filteredNight);
-          break;
-      default:
-          render(lists, tasks);
+    case "Today":
+      let filteredTask = tasks.filter(el => el.date === "Today")
+      render(lists, filteredTask);
+      break;
+    case "Tomorrow":
+      let filteredTom = tasks.filter(el => el.date === "Tomorrow")
+      render(lists, filteredTom);
+      break;
+    case "Doing":
+      let filteredDoing = tasks.filter(el => el.label === "Doing")
+      render(lists, filteredDoing);
+      break;
+    case "Morning":
+      let filteredMorning = tasks.filter(el => el.time === "Morning")
+      render(lists, filteredMorning);
+      break;
+    case "Afternoon":
+      let filteredAfternoon = tasks.filter(el => el.time === "Afternoon")
+      render(lists, filteredAfternoon);
+      break;
+    case "Evening":
+      let filteredEvening = tasks.filter(el => el.time === "Evening")
+      render(lists, filteredEvening);
+      break;
+    case "Night":
+      let filteredNight = tasks.filter(el => el.time === "Night")
+      render(lists, filteredNight);
+      break;
+    default:
+      render(lists, tasks);
   }
 });
 
 // For input certain date or time in add task page
 date.addEventListener("change", () => {
   if (date.options[date.selectedIndex].value == "Pick a date") {
-      getDate.style.display = "block";
-      SaveTAndD.style.display = "flex";
+    getDate.style.display = "block";
+    SaveTAndD.style.display = "flex";
   }
 });
 
 time.addEventListener("change", () => {
   if (time.options[time.selectedIndex].value == "Pick a time") {
-      getTime.style.display = "block";
-      SaveTAndD.style.display = "flex";
+    getTime.style.display = "block";
+    SaveTAndD.style.display = "flex";
   }
 });
 
 SaveTAndD.addEventListener("click", () => {
   if (date.options[date.selectedIndex].value == "Pick a date") {
-      getDate.style.display = "none";
-      SaveTAndD.style.display = "none";
-      postDate.textContent = formatDate(getDate);
-      let postTandD = document.getElementById("postTandD");
-      postTandD.style.display = "flex";
+    getDate.style.display = "none";
+    SaveTAndD.style.display = "none";
+    postDate.textContent = formatDate(getDate);
+    let postTandD = document.getElementById("postTandD");
+    postTandD.style.display = "flex";
   }
   if (time.options[time.selectedIndex].value == "Pick a time") {
-      getTime.style.display = "none";
-      SaveTAndD.style.display = "none";
-      postTime.textContent = formatTime(getTime);
-      postTandD.style.display = "flex";
+    getTime.style.display = "none";
+    SaveTAndD.style.display = "none";
+    postTime.textContent = formatTime(getTime);
+    postTandD.style.display = "flex";
   }
 });
 
@@ -668,4 +668,3 @@ function createNoTasks() {
   name.className = "no-tasks-message";
   lists.appendChild(name);
 }
- 

@@ -137,7 +137,7 @@ html {
 
 .slider:before {
   position: absolute;
-  background-image: url(/assets‏/light.svg);
+  background-image: url(../assets‏/light.svg);
   background-repeat: no-repeat;
   background-position: center;
   content: "";
@@ -158,7 +158,7 @@ input:focus+.slider {
 }
 
 input:checked+.slider:before {
-  background-image: url(/assets‏/dark.svg);
+  background-image: url(../assets‏/dark.svg);
   transform: translateX(35px);
 }
 
@@ -201,7 +201,7 @@ input:checked+.slider:before {
   top: 45%;
   width: 14px;
   height: 8px;
-  background-image: url(/assets‏/arrow.svg);
+  background-image: url(../assets‏/arrow.svg);
 }
 
 /*point the arrow upwards when the select box is open (active):*/
