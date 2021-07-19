@@ -280,7 +280,17 @@ function removeTasks() {
   }
 }
 
-
+// LoadTasks from localStorge
+function loadTasks() {
+  let taskData = localStorage.getItem("tasks");
+  tasks = JSON.parse(taskData);
+  if (!(Array.isArray(tasks) && tasks.length)) {
+      tasks = [];
+      return;
+  }
+  render(lists, tasks);
+}
+window.onload = loadTasks;
 
 // Delete Task from localStorge
 function deleteTask(e) {
