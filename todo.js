@@ -155,10 +155,13 @@ function createTask() {
     color: `${clr.value}`
   }
 
-  labelsData = localStorage.getItem('itemLabels');
-  labelArray = JSON.parse(labelsData)
+  if (localStorage.getItem('itemLabels') === null) {
+    itemLabels = [];
+  } else {
+    itemLabels = JSON.parse(localStorage.getItem('itemLabels'));
+  }
   let label = document.getElementById("label");
-  labelArray.forEach(el => {
+  itemLabels.forEach(el => {
     let opt = document.createElement('option');
     opt.appendChild(document.createTextNode(el));
     label.appendChild(opt);
