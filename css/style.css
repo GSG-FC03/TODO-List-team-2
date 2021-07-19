@@ -88,8 +88,8 @@ html {
 }
 
 .container {
-  width: 100%;
-  height: 100%;
+  width: 99.9vw;
+  height: 100vh;
   overflow: hidden;
   background-color: var(--mainBackground);
 }
@@ -101,6 +101,7 @@ html {
 .above {
   margin: 24px 24px 0px 24px;
 }
+
 /*---------------------------------------*/
 .name {
   font-size: 18px;
@@ -148,15 +149,15 @@ html {
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: #f3f3f3;
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #f3f3f3;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   background-image: url(/assets‏/dark.svg);
   transform: translateX(35px);
 }
@@ -183,7 +184,7 @@ input:checked + .slider:before {
 }
 
 .custom-select select {
-  display: none; /*hide original SELECT element:*/
+  display: none;
 }
 
 .select-selected {
@@ -298,8 +299,8 @@ input:checked + .slider:before {
 .list {
   background-color: var(--taskBackground);
   border-radius: 20px;
-  width: 328px;
-  height: 144px;
+  width: 20.5rem;
+  height: 9rem;
   margin: 20px auto;
   margin-bottom: 0px;
   border: 1px solid #f0f0f0;
@@ -307,11 +308,32 @@ input:checked + .slider:before {
   color: var(--fontColor);
 }
 
-/* text-overflow: ellipsis;
-overflow: hidden;
-white-space: nowrap; */
+.move {
+  animation: move 0.5s;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(0px);
+  }
+
+  100% {
+    transform: translateX(500px);
+  }
+}
+
+@keyframes delete {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
 
 .desc {
+  height: 35px;
   margin-top: 10px;
   font-size: 14px;
   overflow: hidden;
@@ -332,11 +354,6 @@ white-space: nowrap; */
   margin-right: 10px;
   height: 30px;
   background-color: var(--backLabel);
-  /* overflow: hidden;
-  -webkit-line-clamp: 1;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  */
 }
 
 .word {
@@ -364,6 +381,7 @@ white-space: nowrap; */
   border: none;
   position: relative;
 }
+
 .labelsAndCheck input[type="checkbox"]:checked:after {
   left: 11px;
   top: 4px;
@@ -390,7 +408,7 @@ white-space: nowrap; */
   border: none;
   color: var(--fontColor);
   background-color: var(--mainBackground);
-  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
 }
 
 .wordActive {
@@ -414,8 +432,10 @@ white-space: nowrap; */
   width: 60px;
   height: 60px;
   position: absolute;
-  left: 42%;
-  top: -30px;
+  left: 50%;
+  top: 0%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
 }
 
 .tooltip::before {
@@ -457,181 +477,217 @@ white-space: nowrap; */
   text-align: center;
 }
 
-/* Responsive*/
-@media only screen and (min-width: 768px ) and (max-width: 1023px) {
+
+
+/* Responsive for laptop */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
   html {
     font-size: 18px;
   }
-  .container{
+
+  .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
   }
+
   header {
     height: 16%;
   }
-  .recentAndFilter{
+
+  .recentAndFilter {
     margin-top: 10px;
     padding-bottom: 0px;
   }
+
   .wide {
     margin-left: 0px;
   }
+
   .desc {
     height: 52px;
     -webkit-line-clamp: 3;
   }
-  .listsSection{
+
+  .listsSection {
     width: 100%;
     margin-top: 120px;
     overflow-y: auto;
   }
-  .lists{
+
+  .lists {
     margin: 20px 0px;
     display: grid;
-    grid-template-columns: repeat(2,20.5rem );
-    grid-template-rows: repeat(1,9rem);
+    grid-template-columns: repeat(2, 20.5rem);
+    grid-template-rows: repeat(1, 9rem);
     grid-gap: 20px;
     place-items: start;
   }
-  .list{
+
+  .list {
     margin-right: 0px;
     margin-top: 0px;
   }
-  #checkedSection{
-    display: none;    
+
+  #checkedSection {
+    display: none;
   }
-  .footer{
-    height:8%;
+
+  .footer {
+    height: 8%;
   }
+
   @keyframes move {
     0% {
       transform: translateX(0px);
     }
-  
+
     100% {
       transform: translateX(1100px);
     }
   }
 }
 
-@media only screen and (min-width: 1023px) and (max-width: 1700px){
+@media only screen and (min-width: 1023px) and (max-width: 1700px) {
   html {
     font-size: 18px;
   }
-  .container{
+
+  .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
   }
+
   header {
     height: 16%;
   }
-  .recentAndFilter{
+
+  .recentAndFilter {
     margin-top: 10px;
     padding-bottom: 0px;
   }
+
   .desc {
     height: 52px;
     -webkit-line-clamp: 3;
   }
+
   .wide {
     margin-left: 0px;
   }
-  .listsSection{
+
+  .listsSection {
     width: 100%;
     margin-top: 120px;
     overflow-y: auto;
   }
-  .lists{
+
+  .lists {
     margin: 20px 0px;
     display: grid;
-    grid-template-columns: repeat(3,20.5rem);
-    grid-template-rows: repeat(1,9rem);
+    grid-template-columns: repeat(3, 20.5rem);
+    grid-template-rows: repeat(1, 9rem);
     grid-gap: 20px;
     place-items: start;
     padding-left: 30px;
   }
-  .list{
+
+  .list {
     margin-right: 0px;
     margin-top: 0px;
   }
-  #checkedSection{
-    display: none;    
+
+  #checkedSection {
+    display: none;
   }
-  .footer{
-    height:8%;
+
+  .footer {
+    height: 8%;
   }
 
   @keyframes move {
     0% {
       transform: translateX(0px);
     }
-  
+
     100% {
       transform: translateX(1100px);
     }
   }
 }
 
-@media only screen and (min-width: 1700px ) and (max-width: 1920px) {
+
+@media only screen and (min-width: 1700px) and (max-width: 1920px) {
   html {
     font-size: 20px;
   }
-  .container{
+
+  .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
   }
+
   header {
     height: 13%;
   }
-  .recentAndFilter{
+
+  .recentAndFilter {
     margin-top: 10px;
     padding-bottom: 0px;
   }
+
   .desc {
     height: 70px;
     -webkit-line-clamp: 4;
   }
+
   .labelsAndCheck {
     margin-top: 5px;
   }
+
   .wide {
     margin-left: 0px;
   }
-  .listsSection{
+
+  .listsSection {
     width: 100%;
     margin-top: 130px;
     overflow-y: auto;
     height: 800px;
   }
-  .lists{
+
+  .lists {
     margin: 20px 0px;
     display: grid;
-    grid-template-columns: repeat(4,20.5rem );
-    grid-template-rows: repeat(1,9rem);
+    grid-template-columns: repeat(4, 20.5rem);
+    grid-template-rows: repeat(1, 9rem);
     grid-gap: 20px;
     place-items: start;
   }
-  .list{
+
+  .list {
     margin-right: 0px;
     margin-top: 0px;
   }
-  #checkedSection{
-    display: none;    
+
+  #checkedSection {
+    display: none;
   }
-  .footer{
-    height:7%;
+
+  .footer {
+    height: 7%;
   }
+
   @keyframes move {
     0% {
       transform: translateX(0px);
     }
-  
+
     100% {
       transform: translateX(1500px);
     }
