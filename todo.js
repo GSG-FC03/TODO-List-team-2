@@ -1,4 +1,6 @@
 let tasks = [];
+let tasksChecked = [];
+let itemLabels = [];
 
 // Get all element that we want to make something on it
 const themeSwitcher = document.getElementById("checkbox");
@@ -482,6 +484,54 @@ function getUncheckedTasks() {
     }
     render(lists, tasks);
 }
+
+// Sort data
+recentAndReverse.addEventListener("click", e => {
+  if (e.target.textContent == "Reverse") {
+      let reverseTasks = tasks.reverse();
+      render(lists, reverseTasks);
+  } else {
+      let reverseTasks = tasks.reverse();
+      render(lists, reverseTasks);
+  }
+});
+
+// Filter data
+filter.addEventListener("click", e => {
+  switch (e.target.textContent) {
+      case "Today":
+          let filteredTask = tasks.filter(el => el.date === "Today")
+          render(lists, filteredTask);
+          break;
+      case "Tomorrow":
+          let filteredTom = tasks.filter(el => el.date === "Tomorrow")
+          render(lists, filteredTom);
+          break;
+      case "Doing":
+          let filteredDoing = tasks.filter(el => el.label === "Doing")
+          render(lists, filteredDoing);
+          break;
+      case "Morning":
+          let filteredMorning = tasks.filter(el => el.time === "Morning")
+          render(lists, filteredMorning);
+          break;
+      case "Afternoon":
+          let filteredAfternoon = tasks.filter(el => el.time === "Afternoon")
+          render(lists, filteredAfternoon);
+          break;
+      case "Evening":
+          let filteredEvening = tasks.filter(el => el.time === "Evening")
+          render(lists, filteredEvening);
+          break;
+      case "Night":
+          let filteredNight = tasks.filter(el => el.time === "Night")
+          render(lists, filteredNight);
+          break;
+      default:
+          render(lists, tasks);
+  }
+});
+
 // For input certain date or time in add task page
 date.addEventListener("change", () => {
   if (date.options[date.selectedIndex].value == "Pick a date") {
