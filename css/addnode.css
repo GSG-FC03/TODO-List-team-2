@@ -232,3 +232,42 @@
       right: 6%;
       color: var(--actionColor);
   }
+
+  /* Responsive*/
+  @media only screen and (min-width: 1023px) {
+    .addNoteInfo {
+      top: 8%;
+      left: 25%;
+      height: 92%;
+      width: 50%;
+    }
+    .addbody {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-left: 0px;
+    }
+    .widthForForm{
+      width: 80%;
+    }
+    .textdesc{
+      width: 100%;
+    }
+    .dtdiv{
+      justify-content: flex-start;
+    }
+    .selectdate{
+      margin-right: 15px;
+    }
+    .divlabel{
+      justify-content: flex-start;
+    }
+    .selectlabel{
+      margin-right: 15px;
+    }
+    .addcolor input {
+      margin-right:30px;
+    }
+  }
+  
