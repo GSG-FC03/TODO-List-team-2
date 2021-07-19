@@ -460,6 +460,18 @@ function getUncheckedTasks() {
     }
     render(lists, tasks);
 }
+
+// Sort data
+recentAndReverse.addEventListener("click", e => {
+  if (e.target.textContent == "Reverse") {
+      let reverseTasks = tasks.reverse();
+      render(lists, reverseTasks);
+  } else {
+      let reverseTasks = tasks.reverse();
+      render(lists, reverseTasks);
+  }
+});
+
 // Custom select
 var x, i, j, l, ll, selectElement, a, b, c;
 /* Look for any elements with the class "custom-select": */
