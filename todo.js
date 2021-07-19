@@ -168,7 +168,29 @@ function createTask() {
   localStorage.setItem('tasks', JSON.stringify(tasks))
   render(lists, tasks);
 }
-
+ // Format Date
+ function formatDate(dateFormat) {
+  let d = new Date(dateFormat.value),
+      mo = new Intl.DateTimeFormat("en", {
+          month: "short",
+      }).format(d),
+      da = new Intl.DateTimeFormat("en", {
+          day: "2-digit",
+      }).format(d);
+  getDateFormat = `${da}-${mo}`;
+  return getDateFormat;
+}
+// Format Time
+function formatTime(timeFormat) {
+  let timeformat = timeFormat.value.split(":"),
+      hours = timeformat[0],
+      minutes = timeformat[1],
+      ampm = hours >= 12 ? "pm" : "am";
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  let strTime = `${hours}:${minutes} ${ampm}`;
+  return strTime;
+}
 // Put all the tasks in lists DOM
 function render(typeOflist, typeOfArray) {
   postTandD.style.display = "none"
@@ -510,6 +532,38 @@ filter.addEventListener("click", e => {
   }
 });
 
+// For input certain date or time in add task page
+date.addEventListener("change", () => {
+  if (date.options[date.selectedIndex].value == "Pick a date") {
+      getDate.style.display = "block";
+      SaveTAndD.style.display = "flex";
+  }
+});
+
+time.addEventListener("change", () => {
+  if (time.options[time.selectedIndex].value == "Pick a time") {
+      getTime.style.display = "block";
+      SaveTAndD.style.display = "flex";
+  }
+});
+
+SaveTAndD.addEventListener("click", () => {
+  if (date.options[date.selectedIndex].value == "Pick a date") {
+      getDate.style.display = "none";
+      SaveTAndD.style.display = "none";
+      postDate.textContent = formatDate(getDate);
+      let postTandD = document.getElementById("postTandD");
+      postTandD.style.display = "flex";
+  }
+  if (time.options[time.selectedIndex].value == "Pick a time") {
+      getTime.style.display = "none";
+      SaveTAndD.style.display = "none";
+      postTime.textContent = formatTime(getTime);
+      postTandD.style.display = "flex";
+  }
+});
+
+
 // Custom select
 var x, i, j, l, ll, selectElement, a, b, c;
 /* Look for any elements with the class "custom-select": */
@@ -610,3 +664,5 @@ function createNoTasks() {
   name.appendChild(msg);
   name.className = "no-tasks-message";
   lists.appendChild(name);
+}
+ 
