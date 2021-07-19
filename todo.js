@@ -560,3 +560,15 @@ function createNoTasks() {
   name.appendChild(msg);
   name.className = "no-tasks-message";
   lists.appendChild(name);
+  // Format Date
+function formatDate(dateFormat) {
+  let d = new Date(dateFormat.value),
+      mo = new Intl.DateTimeFormat("en", {
+          month: "short",
+      }).format(d),
+      da = new Intl.DateTimeFormat("en", {
+          day: "2-digit",
+      }).format(d);
+  getDateFormat = `${da}-${mo}`;
+  return getDateFormat;
+}
