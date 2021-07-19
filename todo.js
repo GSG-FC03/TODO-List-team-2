@@ -139,10 +139,10 @@ function createTask() {
   let selectedLabel = label.options[label.selectedIndex].text;
 
   if (selectedDate == 'Pick a date') {
-    selectedDate = getDate.value;
+    selectedDate = formatDate(getDate);
   }
   if (selectedTime == 'Pick a time') {
-    selectedTime = getTime.value;
+    selectedTime = formatTime(getTime);
   }
 
   let task = {
@@ -159,7 +159,7 @@ function createTask() {
   } else {
     itemLabels = JSON.parse(localStorage.getItem('itemLabels'));
   }
-  let label = document.getElementById("label");
+  label = document.getElementById("label");
   itemLabels.forEach(el => {
     let opt = document.createElement('option');
     opt.appendChild(document.createTextNode(el));
@@ -222,7 +222,7 @@ function render(typeOflist, typeOfArray) {
 
     let trash = document.createElement("img");
     trash.className = 'trash';
-    trash.setAttribute("src", "assets/trash.svg");
+    trash.setAttribute("src", "../assets/trash.svg");
     trash.setAttribute('data-index', index++);
     trash.addEventListener('click', deleteTask);
 
@@ -255,7 +255,7 @@ function render(typeOflist, typeOfArray) {
 
     let alarm = document.createElement("img");
     alarm.className = 'alarm';
-    alarm.setAttribute("src", "assets/alarmclock.svg");
+    alarm.setAttribute("src", "../assets/alarmclock.svg");
 
     let dataAndTime = document.createElement("span");
     dataAndTime.className = 'dataAndTime';
