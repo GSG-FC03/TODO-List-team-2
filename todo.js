@@ -139,10 +139,10 @@ function createTask() {
   let selectedLabel = label.options[label.selectedIndex].text;
 
   if (selectedDate == 'Pick a date') {
-    selectedDate = getDate.value;
+    selectedDate = formatDate(getDate);
   }
   if (selectedTime == 'Pick a time') {
-    selectedTime = getTime.value;
+    selectedTime = formatTime(getTime);
   }
 
   let task = {
