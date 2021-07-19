@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <title>ToDO</title>
     <link rel="stylesheet" href="/css/onboarding‏.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/addnode.css">
+    <script defer src="/todo.js"></script>
 </head>
+
 <body>
-    
+
     <section class="container">
 
         <section class="lineBelow">
@@ -32,21 +37,25 @@
                 </section>
 
                 <section class="recentAndFilter">
-                    <div class="custom-select">
+                    <div id="recentAndReverse" class="custom-select">
                         <select>
                             <option value="0">Recent</option>
                             <option value="1">Recent</option>
-                            <option value="2">Time</option>
+                            <option value="2">Reverse</option>
                         </select>
                     </div>
 
-                    <div class="custom-select wide">
+                    <div id="filter" class="custom-select wide">
                         <select>
                             <option value="0">Filter</option>
                             <option value="1">None</option>
                             <option value="2">Today</option>
                             <option value="3">Tomorrow</option>
                             <option value="4">Doing</option>
+                            <option value="5">Morning</option>
+                            <option value="6">Afternoon</option>
+                            <option value="7">Evening</option>
+                            <option value="8">Night</option>
                         </select>
                     </div>
 
@@ -59,12 +68,18 @@
             </section>
         </section>
 
-        <section class="listsSection">
+        <section id="uncheckSection" class="listsSection">
             <ul class="lists" id="lists">
-               
+
             </ul>
         </section>
-    
+
+        <section id="checkedSection" class="listsSection">
+            <ul class="lists" id="listOfChecked">
+
+            </ul>
+        </section>
+
         <!-- ---------------------OnBoarding------------------ -->
 
         <section class="bgOfOnBoarding">
@@ -74,106 +89,116 @@
                 </div>
 
                 <section class="BodyofOnBoarding">
-                    <img src="/assets‏/onboarding.svg " width="100%" alt="" />
+                    <div><img src="/assets‏/onboarding.svg " width="100%" alt="" /></div>
 
-                    <h3>Mange your Task</h3>
-                    <p class="para"><b>organize all your do's in lists</b></p>
+                    <div>
+                        <h3>Mange your Task</h3>
+                        <p class="para"><b>organize all your do's in lists</b></p>
 
-                    <secton class="inputName">
-                        <label for="" class="labelName">Name</label>
-                        <input id="nameInput" class="inputt" type="text" placeholder="Enter Your name" />
-                    </secton>
+                        <secton class="inputName">
+                            <label for="" class="labelName">Name</label>
+                            <input id="nameInput" class="inputt" type="text" placeholder="Enter Your name" />
+                        </secton>
 
-                    <button id="start" class="start">Let's start</button>
+                        <button id="start" class="start">Let's start</button>
+                    </div>
                 </section>
             </section>
         </section>
 
         <!-- ---------------------EndOfOnBoarding------------------ -->
-        
 
+        <!-- -------------------addTaskInfo------------------------ -->
 
-<!-- -------------------addTaskInfo------------------------ -->
-
-<section class="addbackground">
-    <section class="addNoteInfo">
-        <div class="closing">
-            <img src="/assets‏/close.svg" class="closingimg closee" alt="" />
-        </div>
-        <div class="addbody">
-            <div class=" addtitlee">
-                <label for="" class="labeltitle">Title</label>
-                <input id="title" type="text " placeholder="New Task" class="titleinput" />
-            </div>
-            <div class="adddescc">
-                <label for="" class="labeldesc">Desc</label>
-                <textarea id="desc" class="textdesc" placeholder="What I have to do.." cols="38"
-                    rows="8"></textarea>
-            </div>
-
-            <div class="dateandtime">
-                <label for="" class="labeldate">Date and Time </label>
-                <div class="dtdiv">
-                    <select id="date" name="" class="selectdate">
-                        <option value="None" selected="selected">None</option>
-                        <option value="Today">Today</option>
-                        <option value="Tomorrow">Tomorrow</option>
-                        <option value="Pick a date">Pick a date..</option>
-                    </select>
-                    <select name="" id="time" class="selecttime">
-                        <option value="None">None</option>
-                        <option value="Morning">Morning</option>
-                        <option value="Afternoon">Afternoon</option>
-                        <option value="Evening">Evening</option>
-                        <option value="Night">Night</option>
-                        <option value="Pick a time">Pick a time..</option>
-                    </select>
+        <section class="addbackground">
+            <section class="addNoteInfo">
+                <div class="closing">
+                    <img src="/assets‏/close.svg" class="closingimg closee" alt="" />
                 </div>
-            </div>
+                <div id="formTask" class="addbody">
+                    <div class=" addtitlee widthForForm">
+                        <label for="" class="labeltitle">Title</label>
+                        <input id="title" type="text " placeholder="New Task" class="titleinput" />
+                    </div>
+                    <div class="adddescc widthForForm">
+                        <label for="" class="labeldesc">Desc</label>
+                        <textarea id="desc" class="textdesc" placeholder="What I have to do.." cols="38"
+                            rows="8"></textarea>
+                    </div>
 
-            <div class="addlabel">
-                <label for="" id="Desc"> Label</label>
-                <div class="divlabel">
-                    <select name="" id="label" class="selectlabel">
-                        <option value="None">None</option>
-                        <option value="Doing">Doing</option>
-                        <option value="To do">To do</option>
-                    </select>
-                    <button id="addLabel" class="addbutton">
-                        <img id="plus" class="" src="/assets‏/add.svg" alt="" />
-                    </button>
+                    <div class="dateandtime widthForForm">
+                        <label for="" class="labeldate">Date and Time </label>
+                        <div class="dtdiv">
+                            <select id="date" name="" class="selectdate">
+                                <option value="None" selected>None</option>
+                                <option value="Today">Today</option>
+                                <option value="Tomorrow">Tomorrow</option>
+                                <option value="Pick a date">Pick a date..</option>
+                            </select>
+                            <select name="" id="time" class="selecttime">
+                                <option value="None">None</option>
+                                <option value="Morning">Morning</option>
+                                <option value="Afternoon">Afternoon</option>
+                                <option value="Evening">Evening</option>
+                                <option value="Night">Night</option>
+                                <option value="Pick a time">Pick a time..</option>
+                            </select>
+                        </div>
+                        <section class="getTimeAndDate">
+                            <input type="time" id="getTime" class="tAndd">
+                            <input type="date" id="getDate" class="tAndd">
+                            <span id="SaveTAndD">Save</span>
+                            <div id="postTandD">
+                                <p id="postDate" class="postTandD"></p>
+                                <p id="postTime" class="postTandD"></p>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="addlabel widthForForm">
+                        <label for="" id="Desc"> Label</label>
+                        <div class="divlabel">
+                            <select name="" id="label" class="selectlabel">
+                                <option value="None">None</option>
+                                <option value="Doing">Doing</option>
+                                <option value="To do">To do</option>
+                            </select>
+                            <button id="addLabel" class="addbutton">
+                                <img id="plus" class="" src="/assets‏/add.svg" alt="" />
+                            </button>
+                        </div>
+                        <div id="enterLabel" class="enterLabel">
+                            <input id="inputLabel" class="inputLabel" placeholder="Enter your label" type="text">
+                            <span id="save" class="save">Save</span>
+                        </div>
+                    </div>
+
+                    <div class="addcolor widthForForm">
+                        <p class="colorWord">Color</p>
+                        <input type="radio" checked name="color" id="" class="clr1 clr" value="var(--taskBackground)" />
+                        <input type="radio" name="color" id="" class="clr2 clr" value="var(--clr)" />
+                        <input type="radio" name="color" id="" class="clr3 clr" value="var(--clr1)" />
+                        <input type="radio" name="color" id="" class="clr4 clr" value="var(--clr2)" />
+                        <input type="radio" name="color" id="" class="clr5 clr" value="var(--clr3)" />
+                    </div>
+
+                    <button id="addTask" class="addTask widthForForm">Add</button>
+                    <button id="updateTask" class="addTask">Update</button>
                 </div>
-                <div id="enterLabel" class="enterLabel">
-                    <input id="inputLabel" class="inputLabel" placeholder="Enter your label" type="text">
-                    <span id="save" class="save">Save</span>
-                </div>
-            </div>
-
-            <div class="addcolor">
-                <p class="colorWord">Color</p>
-                <input type="radio" checked name="color" id="" class="clr1 clr" value="#fff" />
-                <input type="radio" name="color" id="" class="clr2 clr" value="#e4fff4" />
-                <input type="radio" name="color" id="" class="clr3 clr" value="#fff8dd" />
-                <input type="radio" name="color" id="" class="clr4 clr" value="#ffeff3" />
-                <input type="radio" name="color" id="" class="clr5 clr" value="#eaedff" />
-            </div>
-
-            <button id="addTask" class="addTask">Add</button>
-
-        </div>
-    </section>
-</section>
+            </section>
+        </section>
 
         <!-- -------------------EndAddTaskInfo------------------------ -->
+        
         <footer class="footer">
             <button id="add" class="add tooltip"><img src="/assets‏/add.svg" alt="" class="addIcon" /></button>
             <section class="below">
-                <button class="welcomeAndMode sectionWord wordActive">To Do</button>
-                <button class="recentAndFilter sectionWord">Done</button>
+                <button id="uncheck" class="welcomeAndMode sectionWord wordActive">To Do</button>
+                <button id="checked" class="recentAndFilter sectionWord">Done</button>
             </section>
         </footer>
 
     </section>
-<script src="/todo.js">  </script>
 </body>
+
 </html>
