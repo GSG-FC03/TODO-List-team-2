@@ -472,6 +472,42 @@ recentAndReverse.addEventListener("click", e => {
   }
 });
 
+// Filter data
+filter.addEventListener("click", e => {
+  switch (e.target.textContent) {
+      case "Today":
+          let filteredTask = tasks.filter(el => el.date === "Today")
+          render(lists, filteredTask);
+          break;
+      case "Tomorrow":
+          let filteredTom = tasks.filter(el => el.date === "Tomorrow")
+          render(lists, filteredTom);
+          break;
+      case "Doing":
+          let filteredDoing = tasks.filter(el => el.label === "Doing")
+          render(lists, filteredDoing);
+          break;
+      case "Morning":
+          let filteredMorning = tasks.filter(el => el.time === "Morning")
+          render(lists, filteredMorning);
+          break;
+      case "Afternoon":
+          let filteredAfternoon = tasks.filter(el => el.time === "Afternoon")
+          render(lists, filteredAfternoon);
+          break;
+      case "Evening":
+          let filteredEvening = tasks.filter(el => el.time === "Evening")
+          render(lists, filteredEvening);
+          break;
+      case "Night":
+          let filteredNight = tasks.filter(el => el.time === "Night")
+          render(lists, filteredNight);
+          break;
+      default:
+          render(lists, tasks);
+  }
+});
+
 // Custom select
 var x, i, j, l, ll, selectElement, a, b, c;
 /* Look for any elements with the class "custom-select": */
