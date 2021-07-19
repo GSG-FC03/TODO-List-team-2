@@ -222,7 +222,7 @@ function render(typeOflist, typeOfArray) {
 
     let trash = document.createElement("img");
     trash.className = 'trash';
-    trash.setAttribute("src", "assets/trash.svg");
+    trash.setAttribute("src", "../assets/trash.svg");
     trash.setAttribute('data-index', index++);
     trash.addEventListener('click', deleteTask);
 
@@ -255,7 +255,7 @@ function render(typeOflist, typeOfArray) {
 
     let alarm = document.createElement("img");
     alarm.className = 'alarm';
-    alarm.setAttribute("src", "assets/alarmclock.svg");
+    alarm.setAttribute("src", "../assets/alarmclock.svg");
 
     let dataAndTime = document.createElement("span");
     dataAndTime.className = 'dataAndTime';
