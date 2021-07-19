@@ -460,6 +460,38 @@ function getUncheckedTasks() {
     }
     render(lists, tasks);
 }
+// For input certain date or time in add task page
+date.addEventListener("change", () => {
+  if (date.options[date.selectedIndex].value == "Pick a date") {
+      getDate.style.display = "block";
+      SaveTAndD.style.display = "flex";
+  }
+});
+
+time.addEventListener("change", () => {
+  if (time.options[time.selectedIndex].value == "Pick a time") {
+      getTime.style.display = "block";
+      SaveTAndD.style.display = "flex";
+  }
+});
+
+SaveTAndD.addEventListener("click", () => {
+  if (date.options[date.selectedIndex].value == "Pick a date") {
+      getDate.style.display = "none";
+      SaveTAndD.style.display = "none";
+      postDate.textContent = formatDate(getDate);
+      let postTandD = document.getElementById("postTandD");
+      postTandD.style.display = "flex";
+  }
+  if (time.options[time.selectedIndex].value == "Pick a time") {
+      getTime.style.display = "none";
+      SaveTAndD.style.display = "none";
+      postTime.textContent = formatTime(getTime);
+      postTandD.style.display = "flex";
+  }
+});
+
+
 // Custom select
 var x, i, j, l, ll, selectElement, a, b, c;
 /* Look for any elements with the class "custom-select": */
