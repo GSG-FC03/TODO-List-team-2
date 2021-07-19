@@ -159,7 +159,7 @@ function createTask() {
   } else {
     itemLabels = JSON.parse(localStorage.getItem('itemLabels'));
   }
-  let label = document.getElementById("label");
+  label = document.getElementById("label");
   itemLabels.forEach(el => {
     let opt = document.createElement('option');
     opt.appendChild(document.createTextNode(el));
