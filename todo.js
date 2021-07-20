@@ -29,6 +29,8 @@ const model = Array.from(document.querySelectorAll(".bgOfOnBoarding , .addbackgr
 const start = document.getElementById("start");
 const name = document.getElementById("name");
 const nameInput = document.getElementById("nameInput");
+let recentAndReverse = document.getElementById("recentAndReverse");
+let filter = document.getElementById("filter");
 
 // Show onboarding popup;
 if (sessionStorage.getItem("popState") !== "shown") {
@@ -69,7 +71,6 @@ let labelsData = localStorage.getItem('itemLabels');
 itemLabels = JSON.parse(labelsData)
 save.addEventListener("click", () => {
   let valueOfLabel = inputLabel.value;
-
   let label = document.getElementById("label");
   let opt = document.createElement('option');
   opt.appendChild(document.createTextNode(valueOfLabel));
@@ -87,7 +88,6 @@ themeSwitcher.onclick = function () {
       ".list , .label , .borderDark , .select-selected , .lineBelow , .below"
     )
   );
-  let listDark = Array.from(document.querySelectorAll(".list"));
   let checkk = Array.from(document.querySelectorAll('input[type="checkbox"]'));
   let currentTheme = document.documentElement.getAttribute("data-theme");
   let switchToTheme;
@@ -128,14 +128,15 @@ function showAddTaskPage() {
 
 // Create task and storage it in localStorage 
 function createTask() {
+  postTandD.style.display = "none"
   let title = document.getElementById("title");
   let desc = document.getElementById("desc");
   let date = document.getElementById("date");
   let time = document.getElementById("time");
   let label = document.getElementById("label");
   let clr = document.querySelector("input[name=\"color\"]:checked");
-  let selectedDate = date.options[date.selectedIndex].text;
-  let selectedTime = time.options[time.selectedIndex].text;
+  let selectedDate = date.options[date.selectedIndex].value;
+  let selectedTime = time.options[time.selectedIndex].value;
   let selectedLabel = label.options[label.selectedIndex].text;
 
   if (selectedDate == 'Pick a date') {
@@ -153,18 +154,6 @@ function createTask() {
     label: `${selectedLabel}`,
     color: `${clr.value}`
   }
-
-  if (localStorage.getItem('itemLabels') === null) {
-    itemLabels = [];
-  } else {
-    itemLabels = JSON.parse(localStorage.getItem('itemLabels'));
-  }
-  label = document.getElementById("label");
-  itemLabels.forEach(el => {
-    let opt = document.createElement('option');
-    opt.appendChild(document.createTextNode(el));
-    label.appendChild(opt);
-  })
 
   tasks.push(task)
   localStorage.setItem('tasks', JSON.stringify(tasks))
@@ -193,6 +182,19 @@ function formatTime(timeFormat) {
   let strTime = `${hours}:${minutes} ${ampm}`;
   return strTime;
 }
+
+if (localStorage.getItem('itemLabels') === null) {
+  itemLabels = [];
+} else {
+  itemLabels = JSON.parse(localStorage.getItem('itemLabels'));
+}
+label = document.getElementById("label");
+itemLabels.forEach(el => {
+  let opt = document.createElement('option');
+  opt.appendChild(document.createTextNode(el));
+  label.appendChild(opt);
+})
+
 // Put all the tasks in lists DOM
 function render(typeOflist, typeOfArray) {
   postTandD.style.display = "none"
@@ -222,7 +224,7 @@ function render(typeOflist, typeOfArray) {
 
     let trash = document.createElement("img");
     trash.className = 'trash';
-    trash.setAttribute("src", "../assets/trash.svg");
+    trash.setAttribute("src", "assets‏/trash.svg");
     trash.setAttribute('data-index', index++);
     trash.addEventListener('click', deleteTask);
 
@@ -255,7 +257,7 @@ function render(typeOflist, typeOfArray) {
 
     let alarm = document.createElement("img");
     alarm.className = 'alarm';
-    alarm.setAttribute("src", "../assets/alarmclock.svg");
+    alarm.setAttribute("src", "assets‏/alarmclock.svg");
 
     let dataAndTime = document.createElement("span");
     dataAndTime.className = 'dataAndTime';
@@ -322,15 +324,20 @@ window.onload = loadTasks;
 function deleteTask(e) {
   let index = this.dataset.index;
   let tyList = this.parentElement.parentElement.parentElement;
+  this.parentElement.parentElement.style.animation = "delete 0.5s";
   if (tyList.getAttribute("id") == "lists") {
     tasks.splice(index, 1);
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    render(lists, tasks);
+    setTimeout(() => {
+        render(lists, tasks);
+    }, 400);
   }
   if (tyList.getAttribute("id") == "listOfChecked") {
     tasksChecked.splice(index, 1);
     localStorage.setItem("tasksChecked", JSON.stringify(tasksChecked));
-    render(listOfChecked, tasksChecked);
+    setTimeout(() => {
+        render(listOfChecked, tasksChecked);
+    }, 400);
   }
 }
 
@@ -381,6 +388,10 @@ function updateTask(ele) {
     opt.removeAttribute("selected");
     if (opt.value == `${dateObj}`) {
       opt.setAttribute("selected", "");
+    }if(opt.value == `Pick a date` && dateObj.includes('-')){
+      opt.setAttribute("selected", "");
+      postDate.textContent = `${dateObj}`
+      postTandD.style.display = "flex";
     }
   })
 
@@ -388,6 +399,10 @@ function updateTask(ele) {
     opt.removeAttribute("selected");
     if (opt.value == `${timeObj}`) {
       opt.setAttribute("selected", "");
+    }if(opt.value == `Pick a time` && timeObj.includes(':')){
+      opt.setAttribute("selected", "");
+      postTime.textContent = `${timeObj}`
+      postTandD.style.display = "flex";
     }
   })
 
@@ -408,15 +423,23 @@ function updateTask(ele) {
 
 // Update Task button(Edit Task)
 updateTaskbtn.addEventListener('click', () => {
+  let date = document.getElementById("date");
+  let time = document.getElementById("time");
   if (updateChanges(ObjTask)) {
     closeTab();
   } else {
-    console.log(ObjTask.desc)
-    console.log(desc.value)
     ObjTask.title = title.value;
     ObjTask.desc = desc.value;
-    ObjTask.date = date.options[date.selectedIndex].text;
-    ObjTask.time = time.options[time.selectedIndex].text;
+    if(date.options[date.selectedIndex].text == 'Pick a date'){
+      ObjTask.date = formatDate(getDate);
+    }else{
+      ObjTask.date = date.options[date.selectedIndex].text;
+    }
+    if(time.options[time.selectedIndex].text == `Pick a time`){
+      ObjTask.time = formatTime(getTime);
+    }else{
+      ObjTask.time = time.options[time.selectedIndex].text;
+    }
     ObjTask.label = label.options[label.selectedIndex].text;
     ObjTask.color = document.querySelector("input[name=\"color\"]:checked").value;
     localStorage.setItem('tasks', JSON.stringify(tasks))
