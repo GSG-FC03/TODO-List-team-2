@@ -29,6 +29,8 @@ const model = Array.from(document.querySelectorAll(".bgOfOnBoarding , .addbackgr
 const start = document.getElementById("start");
 const name = document.getElementById("name");
 const nameInput = document.getElementById("nameInput");
+let recentAndReverse = document.getElementById("recentAndReverse");
+let filter = document.getElementById("filter");
 
 // Show onboarding popup;
 if (sessionStorage.getItem("popState") !== "shown") {
@@ -69,7 +71,6 @@ let labelsData = localStorage.getItem('itemLabels');
 itemLabels = JSON.parse(labelsData)
 save.addEventListener("click", () => {
   let valueOfLabel = inputLabel.value;
-
   let label = document.getElementById("label");
   let opt = document.createElement('option');
   opt.appendChild(document.createTextNode(valueOfLabel));
@@ -87,7 +88,6 @@ themeSwitcher.onclick = function () {
       ".list , .label , .borderDark , .select-selected , .lineBelow , .below"
     )
   );
-  let listDark = Array.from(document.querySelectorAll(".list"));
   let checkk = Array.from(document.querySelectorAll('input[type="checkbox"]'));
   let currentTheme = document.documentElement.getAttribute("data-theme");
   let switchToTheme;
@@ -134,8 +134,8 @@ function createTask() {
   let time = document.getElementById("time");
   let label = document.getElementById("label");
   let clr = document.querySelector("input[name=\"color\"]:checked");
-  let selectedDate = date.options[date.selectedIndex].text;
-  let selectedTime = time.options[time.selectedIndex].text;
+  let selectedDate = date.options[date.selectedIndex].value;
+  let selectedTime = time.options[time.selectedIndex].value;
   let selectedLabel = label.options[label.selectedIndex].text;
 
   if (selectedDate == 'Pick a date') {
@@ -153,18 +153,6 @@ function createTask() {
     label: `${selectedLabel}`,
     color: `${clr.value}`
   }
-
-  if (localStorage.getItem('itemLabels') === null) {
-    itemLabels = [];
-  } else {
-    itemLabels = JSON.parse(localStorage.getItem('itemLabels'));
-  }
-  label = document.getElementById("label");
-  itemLabels.forEach(el => {
-    let opt = document.createElement('option');
-    opt.appendChild(document.createTextNode(el));
-    label.appendChild(opt);
-  })
 
   tasks.push(task)
   localStorage.setItem('tasks', JSON.stringify(tasks))
@@ -193,6 +181,19 @@ function formatTime(timeFormat) {
   let strTime = `${hours}:${minutes} ${ampm}`;
   return strTime;
 }
+
+if (localStorage.getItem('itemLabels') === null) {
+  itemLabels = [];
+} else {
+  itemLabels = JSON.parse(localStorage.getItem('itemLabels'));
+}
+label = document.getElementById("label");
+itemLabels.forEach(el => {
+  let opt = document.createElement('option');
+  opt.appendChild(document.createTextNode(el));
+  label.appendChild(opt);
+})
+
 // Put all the tasks in lists DOM
 function render(typeOflist, typeOfArray) {
   postTandD.style.display = "none"
@@ -222,7 +223,7 @@ function render(typeOflist, typeOfArray) {
 
     let trash = document.createElement("img");
     trash.className = 'trash';
-    trash.setAttribute("src", "../assets/trash.svg");
+    trash.setAttribute("src", "assets‏/trash.svg");
     trash.setAttribute('data-index', index++);
     trash.addEventListener('click', deleteTask);
 
@@ -255,7 +256,7 @@ function render(typeOflist, typeOfArray) {
 
     let alarm = document.createElement("img");
     alarm.className = 'alarm';
-    alarm.setAttribute("src", "../assets/alarmclock.svg");
+    alarm.setAttribute("src", "assets‏/alarmclock.svg");
 
     let dataAndTime = document.createElement("span");
     dataAndTime.className = 'dataAndTime';
@@ -322,15 +323,20 @@ window.onload = loadTasks;
 function deleteTask(e) {
   let index = this.dataset.index;
   let tyList = this.parentElement.parentElement.parentElement;
+  this.parentElement.parentElement.style.animation = "delete 0.5s";
   if (tyList.getAttribute("id") == "lists") {
     tasks.splice(index, 1);
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    render(lists, tasks);
+    setTimeout(() => {
+        render(lists, tasks);
+    }, 400);
   }
   if (tyList.getAttribute("id") == "listOfChecked") {
     tasksChecked.splice(index, 1);
     localStorage.setItem("tasksChecked", JSON.stringify(tasksChecked));
-    render(listOfChecked, tasksChecked);
+    setTimeout(() => {
+        render(listOfChecked, tasksChecked);
+    }, 400);
   }
 }
 
