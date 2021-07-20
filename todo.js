@@ -388,7 +388,7 @@ function updateTask(ele) {
     opt.removeAttribute("selected");
     if (opt.value == `${dateObj}`) {
       opt.setAttribute("selected", "");
-    }if(opt.value == `Pick a date`){
+    }if(opt.value == `Pick a date` && dateObj.includes('-')){
       opt.setAttribute("selected", "");
       postDate.textContent = `${dateObj}`
       postTandD.style.display = "flex";
@@ -399,7 +399,7 @@ function updateTask(ele) {
     opt.removeAttribute("selected");
     if (opt.value == `${timeObj}`) {
       opt.setAttribute("selected", "");
-    }if(opt.value == `Pick a time`){
+    }if(opt.value == `Pick a time` && timeObj.includes(':')){
       opt.setAttribute("selected", "");
       postTime.textContent = `${timeObj}`
       postTandD.style.display = "flex";
