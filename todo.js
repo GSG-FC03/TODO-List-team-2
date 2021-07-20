@@ -128,6 +128,7 @@ function showAddTaskPage() {
 
 // Create task and storage it in localStorage 
 function createTask() {
+  postTandD.style.display = "none"
   let title = document.getElementById("title");
   let desc = document.getElementById("desc");
   let date = document.getElementById("date");
@@ -387,6 +388,10 @@ function updateTask(ele) {
     opt.removeAttribute("selected");
     if (opt.value == `${dateObj}`) {
       opt.setAttribute("selected", "");
+    }if(opt.value == `Pick a date`){
+      opt.setAttribute("selected", "");
+      postDate.textContent = `${dateObj}`
+      postTandD.style.display = "flex";
     }
   })
 
@@ -394,6 +399,10 @@ function updateTask(ele) {
     opt.removeAttribute("selected");
     if (opt.value == `${timeObj}`) {
       opt.setAttribute("selected", "");
+    }if(opt.value == `Pick a time`){
+      opt.setAttribute("selected", "");
+      postTime.textContent = `${timeObj}`
+      postTandD.style.display = "flex";
     }
   })
 
@@ -414,15 +423,23 @@ function updateTask(ele) {
 
 // Update Task button(Edit Task)
 updateTaskbtn.addEventListener('click', () => {
+  let date = document.getElementById("date");
+  let time = document.getElementById("time");
   if (updateChanges(ObjTask)) {
     closeTab();
   } else {
-    console.log(ObjTask.desc)
-    console.log(desc.value)
     ObjTask.title = title.value;
     ObjTask.desc = desc.value;
-    ObjTask.date = date.options[date.selectedIndex].text;
-    ObjTask.time = time.options[time.selectedIndex].text;
+    if(date.options[date.selectedIndex].text == 'Pick a date'){
+      ObjTask.date = formatDate(getDate);
+    }else{
+      ObjTask.date = date.options[date.selectedIndex].text;
+    }
+    if(time.options[time.selectedIndex].text == `Pick a time`){
+      ObjTask.time = formatTime(getTime);
+    }else{
+      ObjTask.time = time.options[time.selectedIndex].text;
+    }
     ObjTask.label = label.options[label.selectedIndex].text;
     ObjTask.color = document.querySelector("input[name=\"color\"]:checked").value;
     localStorage.setItem('tasks', JSON.stringify(tasks))
